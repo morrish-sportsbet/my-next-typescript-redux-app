@@ -14,7 +14,14 @@ import {
   Typography,
   Container,
   Box,
+  Divider,
+  IconButton,
+  ListItemAvatar,
+  Avatar,
+  ListItemText,
 } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import WorkIcon from "@mui/icons-material/Work";
 
 interface FormValues {
   taskName: string;
@@ -50,17 +57,30 @@ const MyAppComponent: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="md">
+    <Container>
       <Box mt={4}>
         <Typography variant="h4" gutterBottom>
           Task List
         </Typography>
-        <List>
+        <List dense>
           {tasks.map((task: Task) => (
-            <ListItem key={task.id}>
-              <ListItemButton onClick={() => handleRemoveTask(task.id)}>
-                {task.name}
-              </ListItemButton>
+            <ListItem
+              secondaryAction={
+                <IconButton
+                  onClick={() => handleRemoveTask(task.id)}
+                  edge="end"
+                  aria-label="delete"
+                >
+                  <DeleteIcon />
+                </IconButton>
+              }
+            >
+              <ListItemAvatar>
+                <Avatar>
+                  <WorkIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={task.name} />
             </ListItem>
           ))}
         </List>
